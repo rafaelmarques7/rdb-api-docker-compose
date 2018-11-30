@@ -4,6 +4,35 @@ This module uses docker-compose to build and run an application that exposes a M
 
 <hr/>
 
+## Table of Contents
+
+- [Basic Data API w/ docker-compose](#basic-data-api-w-docker-compose)
+  - [Table of Contents](#table-of-contents)
+  - [Folder structure](#folder-structure)
+  - [WWH](#wwh)
+  - [Usage](#usage)
+    - [Prerequisites](#prerequisites)
+    - [Run](#run)
+  - [Implementation details](#implementation-details)
+  - [Resources](#resources)
+
+<hr/>
+
+## Folder structure
+
+```
+.
+├── app
+│   ├── app.py
+│   ├── Dockerfile
+│   └── requirements.txt
+├── db
+│   └── init.sql
+├── build.sh
+├── docker-compose.yml
+└── README.md
+```
+
 ## WWH
 
 * **What** Defines an API.
@@ -39,7 +68,6 @@ In some cases, this may raise errors, f.e., because the image is not being rebui
 
   ```bash
   ./build.sh
-  docker-compose up
   ```
 
 <hr/>
@@ -161,3 +189,13 @@ In some cases, this may raise errors, f.e., because the image is not being rebui
     volumes:
     - ./db:/docker-entrypoint-initdb.d/:ro
     ```
+
+<hr/>
+
+## Resources
+
+* [tutorial](https://medium.com/@shamir.stav_83310/dockerizing-a-flask-mysql-app-with-docker-compose-c4f51d20b40d) that was followed during the development of this project.
+* docker stuff
+  * [install](https://docs.docker.com/compose/install/#install-compose) docker-compose)
+  * [docker cmd vs run](https://stackoverflow.com/questions/37461868/whats-the-difference-between-run-and-cmd-in-a-docker-file-and-when-should-i-use)
+  * force [docker-compose rebuild](https://stackoverflow.com/questions/32612650/how-to-get-docker-compose-to-always-re-create-containers-from-fresh-images)
