@@ -4,40 +4,41 @@ import json
 
 app = Flask(__name__)
 
+# DB configuration payload
+config = {
+  'user': 'root',
+  'password': 'root',
+  'host': 'db',
+  'port': '3306',
+  'database': 'people'
+}
+
 def get_payload():  
-  config = {
-    'user': 'root',
-    'password': 'root',
-    'host': 'db',
-    'port': '3306',
-    'database': 'people'
-  }
+  # Establish connection to DB
   connection = mysql.connector.connect(**config)
   cursor = connection.cursor()
-  # get command
+  # Get data
   get = 'SELECT * FROM developers'
   cursor.execute(get)
-  # iterate over response
-  results = [{
+  # Construct response
+  response = [{
     "user": {
       "name": name,
       "age": age
     }
   } for (user_id, name, age) in cursor]
-  print(results)
+  # Close connection
   cursor.close()
   connection.close()
+  # Respond
   return results 
 
 @app.route('/')
 def index():
-  #get user data
   payload = get_payload()
   return json.dumps(payload)
 
 if __name__ == '__main__':
-  print("running main app.py")
   app.run(host='0.0.0.0')
-  #app.run(host='localhost:5000')
 
 
